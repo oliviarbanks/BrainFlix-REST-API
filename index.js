@@ -11,7 +11,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/public-images", express.static("./public/images"));
+app.use("/images", express.static("./public/images"));
 
 app.use("/videos", videoRoute);
 

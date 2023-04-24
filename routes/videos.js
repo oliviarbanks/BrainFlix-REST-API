@@ -30,7 +30,7 @@ router.post("/", (req, res) => {
     id: uuidv4(),
     title: req.body.title,
     channel: "Channel Name",
-    image: "../public/images/image1.jpg",
+    image: req.body.image,
     description: req.body.description,
     views: 0,
     likes: 0,
