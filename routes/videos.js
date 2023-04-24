@@ -20,34 +20,29 @@ router.get("/:id", (req, res) => {
   });
   if (!foundVideo) {
     res.status(404).send("Video not found");
-  } else if (req.query.minimal === "true") {
-    res.json({
-      title: foundVideo.title,
-      channel: foundVideo.channel,
-      image: foundVideo.image,
-    });
   } else {
-    res.json(foundVideo);
+    res.status(201).json(foundVideo);
   }
 });
 
 router.post("/", (req, res) => {
-  const newVideo = {
+  let newVideo = {
     id: uuidv4(),
     title: req.body.title,
-    channel: req.body.channel,
-    image: req.body.image,
+    channel: "Channel Name",
+    image: "../public/images/image1.jpg",
     description: req.body.description,
-    views: req.body.views,
-    likes: req.body.likes,
-    duration: req.body.duration,
+    views: 0,
+    likes: 0,
+    duration: "0:00",
     video: req.body.video,
-    timestamp: req.body.timestamp,
+    timestamp: new Date().toISOString(),
+    comments: [],
   };
   const videos = readVideoDetailsFile();
-  videoList.push(newVideo);
+  videos.push(newVideo);
   fs.writeFileSync("./data/data.json", JSON.stringify(videos));
-  res.json(newVideo);
+  res.status(202).json(newVideo);
 });
 
 module.exports = router;
