@@ -26,6 +26,7 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
+  const timestamp = Math.floor(Date.parse(new Date()) / 1000);
   let newVideo = {
     id: uuidv4(),
     title: req.body.title,
@@ -36,7 +37,7 @@ router.post("/", (req, res) => {
     likes: 0,
     duration: "0:00",
     video: req.body.video,
-    timestamp: new Date().toISOString(),
+    timestamp: timestamp,
     comments: [],
   };
   const videos = readVideoDetailsFile();
